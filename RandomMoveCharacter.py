@@ -22,10 +22,10 @@ def handle_events():
 running = True
 x, y = TUK_WIDTH//2, TUK_HEIGHT//2
 frame = 0
+dirX = 0
 i = 0
 
 p = (random.randint(100, 900), random.randint(100, 900))
-
 
 while running:
     clear_canvas()
@@ -35,17 +35,15 @@ while running:
     point.draw(p[0], p[1])
 
     # 캐릭터가 바라보는 방향이 이동 방향과 일치
-    # WIDTH & HEIGHT / 2를 이용하자
-    #if (x >= TUK_WIDTH/2):
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
-    # else:
-    #     character.clip_composite_draw(frame * 100, 100 * 1, 100, 100, 0, 'h', x, y)
+    #if dirX >= 0:
+    character.clip_draw(frame * 100, 0, 100, 100, x, y)
+    # elif dirX < 0:
+    #     character.clip_draw(frame * 100, 100, 100, 100, x, y)
 
 
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
-    #MoveTo((x, y), (p1, p2))
 
     # 소년이 손을 따라감
     t = i/100
@@ -57,7 +55,12 @@ while running:
     # 손에 도착하면 손이 자동으로 랜덤 생성
     if(x == p[0] and y == p[1]):
         i=0
+        dirX=0
         p = (random.randint(100, 900), random.randint(100, 900))
+        # if x >= TUK_WIDTH//2 :
+        #     dirX += 1
+        # else:
+        #     dirX -= 1
 
 
 
